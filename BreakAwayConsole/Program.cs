@@ -1,5 +1,6 @@
-﻿using System.Data.Entity;
-using DataAccess;
+﻿using DataAccess;
+using Model;
+using System.Data.Entity;
 
 namespace BreakAwayConsole
 {
@@ -8,6 +9,13 @@ namespace BreakAwayConsole
 		private static void Main(string[] args)
 		{
 			Database.SetInitializer(new InitializeBagaDatabaseWithSeedData());
+
+			using (var context = new BreakAwayContext())
+			{
+				context.Activities.Add(new Activity { Name = "skiing" });
+
+				context.SaveChanges();
+			}
 
 			// Call the latest example method here
 

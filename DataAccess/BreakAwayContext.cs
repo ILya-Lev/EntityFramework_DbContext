@@ -1,5 +1,7 @@
 ﻿using Model;
+using System;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace DataAccess
 {
@@ -12,5 +14,11 @@ namespace DataAccess
 		public DbSet<Reservation> Reservations { get; set; }
 		public DbSet<Payment> Payments { get; set; }
 		public DbSet<Activity> Activities { get; set; }
+
+		public BreakAwayContext() : base("BreakAwayDatabase")
+		{
+			Database.Log = Console.WriteLine;
+			Database.Log += message => Debug.WriteLine(message);
+		}
 	}
 }
